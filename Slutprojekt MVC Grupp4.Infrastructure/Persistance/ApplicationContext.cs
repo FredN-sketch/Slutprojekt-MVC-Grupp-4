@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Slutprojekt.Domain.Entities;
+using Slutprojekt.Infrastructure.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Slutprojekt.Infrastructure.Persistance;
 
-public class ApplicationContext(DbContextOptions<ApplicationContext> options) : DbContext(options)
+public class ApplicationContext(DbContextOptions<ApplicationContext> options) : IdentityDbContext<ApplicationUser, IdentityRole, string>(options)
 {
     public DbSet<BreedType> BreedTypes { get; set; } = null!;
     public DbSet<Breed> Breeds { get; set; } = null!;

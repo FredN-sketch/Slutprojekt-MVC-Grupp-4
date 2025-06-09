@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Slutprojekt.Infrastructure.Persistance;
 
-public class UnitOfWork(ApplicationContext context, IBreedsRepository breedsRepository, IBreedTypeService breedTypeService):IUnitOfWork
+public class UnitOfWork(ApplicationContext context, IBreedsRepository breedsRepository, IBreedTypeRepository breedTypeRepository):IUnitOfWork
 {
     public IBreedsRepository BreedsRepository => breedsRepository;
-    public IBreedTypeService BreedTypeService => breedTypeService;
+    public IBreedTypeRepository BreedTypeRepository => breedTypeRepository;
     public async Task SaveChangesAsync()
     {
         await context.SaveChangesAsync();

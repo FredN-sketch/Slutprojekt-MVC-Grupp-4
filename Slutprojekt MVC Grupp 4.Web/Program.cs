@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Slutprojekt.Application;
 using Slutprojekt.Application.Breeds.Interfaces;
@@ -20,8 +21,6 @@ namespace Slutprojekt_MVC_Grupp_4.Web
             builder.Services.AddScoped<IBreedTypeRepository, BreedTypeRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ApplicationContext>();
-            //   builder.Services.AddScoped
-            //   builder.Services.AddTransient
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -29,7 +28,18 @@ namespace Slutprojekt_MVC_Grupp_4.Web
             builder.Services.AddDbContext<ApplicationContext>(options => 
                 options.UseSqlServer(connectionString));
 
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = true;
+            }).AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+
+            builder.Services.ConfigureApplicationCookie(o => o.LoginPath = "/login");
+
             var app = builder.Build();
+
+            app.UseAuthorization();
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/error/exception");

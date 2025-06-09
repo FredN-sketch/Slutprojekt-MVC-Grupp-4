@@ -10,7 +10,7 @@ namespace Slutprojekt.Application
     public interface IUnitOfWork
     {
         IBreedsRepository BreedsRepository { get; }
-        IBreedTypeService BreedTypeService { get; }
+        IBreedTypeRepository BreedTypeRepository { get; }
         Task SaveChangesAsync();
     }
 }
