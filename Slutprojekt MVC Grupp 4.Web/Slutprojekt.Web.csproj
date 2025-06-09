@@ -4,11 +4,11 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Slutprojekt_MVC_Grupp_4.Web</RootNamespace>
+    <RootNamespace>Slutprojekt.Web</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Slutprojekt MVC Grupp4.Infrastructure\Slutprojekt MVC Grupp4.Infrastructure.csproj" />
+    <ProjectReference Include="..\Slutprojekt MVC Grupp4.Infrastructure\Slutprojekt.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

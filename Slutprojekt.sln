@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36202.13 d17.14
+VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slutprojekt MVC Grupp 4.Web", "Slutprojekt MVC Grupp 4.Web\Slutprojekt MVC Grupp 4.Web.csproj", "{0C7121E3-A111-4016-8D7B-039FFAB542A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slutprojekt.Web", "Slutprojekt MVC Grupp 4.Web\Slutprojekt.Web.csproj", "{0C7121E3-A111-4016-8D7B-039FFAB542A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slutprojekt MVC Grupp4.Application", "Slutprojekt MVC Grupp4.Application\Slutprojekt MVC Grupp4.Application.csproj", "{70972CE9-578E-4E09-A1DF-3CEE11819FB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slutprojekt.Application", "Slutprojekt MVC Grupp4.Application\Slutprojekt.Application.csproj", "{70972CE9-578E-4E09-A1DF-3CEE11819FB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slutprojekt MVC Grupp4.Domain", "Slutprojekt MVC Grupp4.Domain\Slutprojekt MVC Grupp4.Domain.csproj", "{5DCBBA1A-120F-4873-96C6-CE87820F22A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slutprojekt.Domain", "Slutprojekt MVC Grupp4.Domain\Slutprojekt.Domain.csproj", "{5DCBBA1A-120F-4873-96C6-CE87820F22A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slutprojekt MVC Grupp4.Infrastructure", "Slutprojekt MVC Grupp4.Infrastructure\Slutprojekt MVC Grupp4.Infrastructure.csproj", "{8B2B49DE-4BDA-43DC-9A76-AA4A78887CC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Slutprojekt.Infrastructure", "Slutprojekt MVC Grupp4.Infrastructure\Slutprojekt.Infrastructure.csproj", "{8B2B49DE-4BDA-43DC-9A76-AA4A78887CC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

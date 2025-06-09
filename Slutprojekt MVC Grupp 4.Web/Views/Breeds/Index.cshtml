@@ -1,0 +1,18 @@
+﻿@model IndexVM
+@{
+	ViewBag.Title = "Breeds";
+}
+
+
+	<h3 class="mb-1">Dogbreeds</h3>
+	<div>
+		<ul class="list-group mb-3" >
+			@foreach (var breed in Model.Raser)
+			{
+			<li class="list-group-item"> <div> <a asp-controller="Breeds" asp-action="DisplayBreed" asp-route-id="@breed.Id">  @breed.BreedName</a></div></li>
+			}
+
+		</ul>
+	</div>
+	<h3><a asp-action="InsertBreed">Add Breed</a></h3>
+

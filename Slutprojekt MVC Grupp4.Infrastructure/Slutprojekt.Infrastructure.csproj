@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>Slutprojekt_MVC_Grupp4.Infrastructure</RootNamespace>
+    <RootNamespace>Slutprojekt.Infrastructure</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Slutprojekt MVC Grupp4.Application\Slutprojekt MVC Grupp4.Application.csproj" />
+    <ProjectReference Include="..\Slutprojekt MVC Grupp4.Application\Slutprojekt.Application.csproj" />
   </ItemGroup>
 
 </Project>
