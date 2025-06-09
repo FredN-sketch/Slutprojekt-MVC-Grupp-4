@@ -22,14 +22,18 @@ public class IdentityUserService(
         if (!await roleManager.RoleExistsAsync(RoleName))
             await roleManager.CreateAsync(new IdentityRole(RoleName));
 
-        var result = await userManager.CreateAsync(new ApplicationUser
+        var appuser = new ApplicationUser
         {
             UserName = user.Email,
             Email = user.Email,
             FirstName = user.FirstName,
             LastName = user.LastName,
             Admin = user.Admin
-        }, password)           ;
+        };
+        var result = await userManager.CreateAsync(appuser, password);
+        // Lägg till en användare till en roll
+        if (user.Admin)
+            await userManager.AddToRoleAsync(appuser, RoleName);
 
 
         return new UserResultDto(result.Errors.FirstOrDefault()?.Description);
