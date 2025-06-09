@@ -3,9 +3,9 @@ using Slutprojekt.Domain.Entities;
 
 namespace Slutprojekt.Application.Breeds.Services;
 
-public class BreedTypeService(IBreedTypeRepository breedTypeRepository): IBreedTypeService
+public class BreedTypeService(IUnitOfWork unitOfWork): IBreedTypeService
 {
-    public async Task<BreedType[]> GetAllBreedTypesAsync() => (await breedTypeRepository.GetAllBreedTypesAsync()).OrderBy(b => b.Id).ToArray();
+    public async Task<BreedType[]> GetAllBreedTypesAsync() => (await unitOfWork.BreedTypeService.GetAllBreedTypesAsync()).OrderBy(b => b.Id).ToArray();
 
-    public async Task<BreedType> GetBreedTypeByIdAsync(int id) => await breedTypeRepository.GetBreedTypeByIdAsync(id);
+    public async Task<BreedType> GetBreedTypeByIdAsync(int id) => await unitOfWork.BreedTypeService.GetBreedTypeByIdAsync(id);
 }

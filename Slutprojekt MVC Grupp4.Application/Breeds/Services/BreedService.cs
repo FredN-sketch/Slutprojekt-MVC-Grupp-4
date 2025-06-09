@@ -4,22 +4,22 @@ using Slutprojekt.Domain.Entities;
 
 namespace Slutprojekt.Application.Breeds.Services;
 
-public class BreedService(IBreedsRepository breedsRepository): IBreedService
+public class BreedService(IUnitOfWork unitOfWork): IBreedService
 {
     static int nextId = 71;
 
     public async Task<Breed[]> GetAllBreedsAsync()
     {
-        return [.. (await breedsRepository.GetAllBreedsAsync()).OrderBy(o => o.BreedName)];
+        return [.. (await unitOfWork.BreedsRepository.GetAllBreedsAsync()).OrderBy(o => o.BreedName)];
     }
 
     public async Task<Breed> GetBreedByIdAsync(int id)
     {
-        return await breedsRepository.GetBreedByIdAsync(id);
+        return await unitOfWork.BreedsRepository.GetBreedByIdAsync(id);
     }
 
     public async Task AddBreedAsync(Breed breed)
     {
-        await breedsRepository.AddBreedAsync(breed);
+        await unitOfWork.BreedsRepository.AddBreedAsync(breed);
     }
 }
