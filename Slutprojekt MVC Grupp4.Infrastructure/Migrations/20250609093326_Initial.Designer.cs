@@ -11,7 +11,7 @@ using Slutprojekt.Infrastructure.Persistance;
 namespace Slutprojekt.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250609091546_Initial")]
+    [Migration("20250609093326_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

@@ -1,4 +1,4 @@
-﻿using Slutprojekt.Application.Interfaces;
+﻿using Slutprojekt.Application.Breeds.Interfaces;
 using Slutprojekt.Domain.Entities;
 
 namespace Slutprojekt.Application.Breeds.Services;

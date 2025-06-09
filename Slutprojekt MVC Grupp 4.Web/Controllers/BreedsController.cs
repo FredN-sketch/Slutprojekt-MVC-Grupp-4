@@ -11,9 +11,9 @@ public class BreedsController(BreedService breedService, BreedTypeService breedT
     //public static BreedService breedService = new BreedService();
 
     [Route("/")]
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        var model = breedService.getAllBreeds();
+        var model = await breedService.GetAllBreedsAsync();
         var view = new IndexVM()
         {
             Raser = model
@@ -29,9 +29,9 @@ public class BreedsController(BreedService breedService, BreedTypeService breedT
     }
 
     [HttpGet("display/{id}")]
-    public IActionResult DisplayBreed(int id)
+    public async Task<IActionResult> DisplayBreed(int id)
     {
-        var model = breedService.getBreedById(id);
+        var model = await breedService.GetBreedByIdAsync(id);
         var mode2 = breedType.GetBreedTypeById(model.BreedType);
 
         DisplayBreedVM view = new DisplayBreedVM
@@ -65,7 +65,7 @@ public class BreedsController(BreedService breedService, BreedTypeService breedT
         return View(view);
     }
     [HttpPost("Create")]
-    public IActionResult InsertBreed(InsertBreedVM model)
+    public async Task<IActionResult> InsertBreed(InsertBreedVM model)
     {
         if (!ModelState.IsValid)
         {
@@ -79,7 +79,7 @@ public class BreedsController(BreedService breedService, BreedTypeService breedT
             Description = model.Description,
         };
 
-        breedService.addBreed(breed);
+        await breedService.AddBreedAsync(breed);
         return RedirectToAction("Index");
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Slutprojekt.Domain.Entities;
-using Slutprojekt.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Slutprojekt.Application.Breeds.Interfaces;
 
 namespace Slutprojekt.Infrastructure.Persistance.Repositories
 {
