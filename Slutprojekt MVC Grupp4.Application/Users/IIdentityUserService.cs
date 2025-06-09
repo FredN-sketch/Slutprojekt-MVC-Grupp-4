@@ -7,5 +7,8 @@ namespace Slutprojekt.Application.Users
         public Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password);
 
         public Task<UserResultDto> SignInAsync(string email, string password);
+
+        public Task SignOutAsync();
+   
     }
 }

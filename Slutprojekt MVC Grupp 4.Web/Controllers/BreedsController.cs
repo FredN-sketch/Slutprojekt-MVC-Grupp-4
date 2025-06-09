@@ -4,9 +4,11 @@ using Slutprojekt.Application.Breeds.Services;
 using Slutprojekt.Web.Views.Breeds;
 using Microsoft.AspNetCore.Mvc;
 using Slutprojekt.Application.Breeds.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Slutprojekt.Web.Controllers;
 
+[Authorize]
 public class BreedsController(IBreedService breedService, IBreedTypeService breedType) : Controller
 {
     //public static BreedService breedService = new BreedService();
