@@ -6,4 +6,4 @@ using System.Threading.Tasks;
 
 namespace Slutprojekt.Application.Dtos;
 
-public record UserProfileDto(string Email, string FirstName, string LastName);
+public record UserProfileDto(string Email, string FirstName, string LastName, bool Admin);

@@ -26,5 +26,9 @@ namespace Slutprojekt.Web.Views.Account
         [Display(Name = "Repeat password")]
         [Compare(nameof(Password))]
         public string PasswordRepeat { get; set; } = null!;
+
+        [Required]
+        [Display(Name = "Admin")]
+        public bool Admin { get; set; } = false;
     }
 }

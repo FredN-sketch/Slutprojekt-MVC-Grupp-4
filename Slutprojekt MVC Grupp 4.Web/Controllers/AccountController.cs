@@ -30,7 +30,7 @@ namespace Slutprojekt.Web.Controllers
                 return View();
 
             // Try to register user
-            var userDto = new UserProfileDto(viewModel.Email, viewModel.FirstName, viewModel.LastName);
+            var userDto = new UserProfileDto(viewModel.Email, viewModel.FirstName, viewModel.LastName, viewModel.Admin);
             var result = await userService.CreateUserAsync(userDto, viewModel.Password);
             if (!result.Succeeded)
             {

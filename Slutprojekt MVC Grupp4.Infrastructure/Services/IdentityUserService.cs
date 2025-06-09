@@ -13,16 +13,22 @@ namespace Slutprojekt.Infrastructure.Services;
 
 public class IdentityUserService(
     UserManager<ApplicationUser> userManager,
-    SignInManager<ApplicationUser> signInManager) : IIdentityUserService
+    SignInManager<ApplicationUser> signInManager,
+    RoleManager<ApplicationUser> roleManager) : IIdentityUserService
 {
+    const string RoleName = "Administrator";
     public async Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password)
     {
+        if (!await roleManager.RoleExistsAsync(RoleName))
+            await roleManager.CreateAsync(new IdentityRole(RoleName));
+
         var result = await userManager.CreateAsync(new ApplicationUser
         {
             UserName = user.Email,
             Email = user.Email,
             FirstName = user.FirstName,
-            LastName = user.LastName
+            LastName = user.LastName,
+            Admin = user.Admin
         }, password);
 
         return new UserResultDto(result.Errors.FirstOrDefault()?.Description);

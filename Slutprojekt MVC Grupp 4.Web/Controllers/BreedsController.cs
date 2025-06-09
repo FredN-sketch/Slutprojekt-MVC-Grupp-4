@@ -1,10 +1,11 @@
-﻿using System.Reflection;
-using Slutprojekt.Domain.Entities;
-using Slutprojekt.Application.Breeds.Services;
-using Slutprojekt.Web.Views.Breeds;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Slutprojekt.Application.Breeds.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+using Slutprojekt.Application.Breeds.Services;
+using Slutprojekt.Domain.Entities;
+using Slutprojekt.Web.Views.Breeds;
+using System.Data;
+using System.Reflection;
 
 namespace Slutprojekt.Web.Controllers;
 
@@ -12,9 +13,27 @@ namespace Slutprojekt.Web.Controllers;
 public class BreedsController(IBreedService breedService, IBreedTypeService breedType) : Controller
 {
     //public static BreedService breedService = new BreedService();
-
+    [Route("members")]
     [Route("/")]
     public async Task<IActionResult> Index()
+    {
+        var model = await breedService.GetAllBreedsAsync();
+        var view = new IndexVM()
+        {
+            Raser = model
+            .Select(o => new IndexVM.HundrasVM
+            {
+                Id = o.Id,
+                BreedName = o.BreedName,
+            })
+            .ToArray()
+        };
+
+        return View(view);
+    }
+   // [Authorize(Role = "admin")]
+    [Route("admin")]
+    public async Task<IActionResult> Admin()
     {
         var model = await breedService.GetAllBreedsAsync();
         var view = new IndexVM()
