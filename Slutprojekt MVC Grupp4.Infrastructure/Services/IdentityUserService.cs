@@ -14,7 +14,7 @@ namespace Slutprojekt.Infrastructure.Services;
 public class IdentityUserService(
     UserManager<ApplicationUser> userManager,
     SignInManager<ApplicationUser> signInManager,
-    RoleManager<ApplicationUser> roleManager) : IIdentityUserService
+    RoleManager<IdentityRole> roleManager) : IIdentityUserService
 {
     const string RoleName = "Administrator";
     public async Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password)
@@ -29,7 +29,8 @@ public class IdentityUserService(
             FirstName = user.FirstName,
             LastName = user.LastName,
             Admin = user.Admin
-        }, password);
+        }, password)           ;
+
 
         return new UserResultDto(result.Errors.FirstOrDefault()?.Description);
     }
