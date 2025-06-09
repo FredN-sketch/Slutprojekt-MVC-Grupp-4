@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Slutprojekt.Application;
 using Slutprojekt.Application.Breeds.Interfaces;
 using Slutprojekt.Application.Breeds.Services;
 using Slutprojekt.Infrastructure.Persistance;
@@ -16,6 +17,8 @@ namespace Slutprojekt_MVC_Grupp_4.Web
             builder.Services.AddScoped<IBreedTypeService, BreedTypeService>();
             builder.Services.AddScoped<IBreedService, BreedService>();
             builder.Services.AddScoped<IBreedsRepository, BreedsRepository>();
+            builder.Services.AddScoped<IBreedTypeRepository, BreedTypeRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ApplicationContext>();
             //   builder.Services.AddScoped
             //   builder.Services.AddTransient

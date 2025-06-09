@@ -3,10 +3,11 @@ using Slutprojekt.Domain.Entities;
 using Slutprojekt.Application.Breeds.Services;
 using Slutprojekt.Web.Views.Breeds;
 using Microsoft.AspNetCore.Mvc;
+using Slutprojekt.Application.Breeds.Interfaces;
 
 namespace Slutprojekt.Web.Controllers;
 
-public class BreedsController(BreedService breedService, BreedTypeService breedType) : Controller
+public class BreedsController(IBreedService breedService, IBreedTypeService breedType) : Controller
 {
     //public static BreedService breedService = new BreedService();
 
@@ -32,7 +33,7 @@ public class BreedsController(BreedService breedService, BreedTypeService breedT
     public async Task<IActionResult> DisplayBreed(int id)
     {
         var model = await breedService.GetBreedByIdAsync(id);
-        var mode2 = breedType.GetBreedTypeById(model.BreedType);
+        var mode2 = await breedType.GetBreedTypeByIdAsync(model.BreedType);
 
         DisplayBreedVM view = new DisplayBreedVM
         {
@@ -45,13 +46,13 @@ public class BreedsController(BreedService breedService, BreedTypeService breedT
 
 
     [HttpGet("Create")]
-    public IActionResult InsertBreed()
+    public async Task<IActionResult> InsertBreed()
     {
         InsertBreedVM view = new InsertBreedVM()
         {
             Id = 0,
             BreedType = 0,
-            BreedTypes = breedType.GetAllBreedTypes()
+            BreedTypes = (await breedType.GetAllBreedTypesAsync())
             .Select(o => new InsertBreedVM.TypesVM()
             {
                 Id = o.Id,

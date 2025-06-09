@@ -4,6 +4,6 @@ namespace Slutprojekt.Application.Breeds.Interfaces;
 
 public interface IBreedTypeService
 {
-    BreedType[] GetAllBreedTypes();
-    BreedType GetBreedTypeById(int id);
+    Task<BreedType[]> GetAllBreedTypesAsync();
+    Task<BreedType> GetBreedTypeByIdAsync(int id);
 }
