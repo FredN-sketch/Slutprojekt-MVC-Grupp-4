@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Slutprojekt.Application.Breeds.Services;
+using Slutprojekt.Application.Interfaces;
+using Slutprojekt.Infrastructure.Persistance;
+using Slutprojekt.Infrastructure.Persistance.Repositories;
 
 namespace Slutprojekt_MVC_Grupp_4.Web
 {
@@ -9,10 +13,17 @@ namespace Slutprojekt_MVC_Grupp_4.Web
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddSingleton<BreedTypeService>();
-            builder.Services.AddSingleton<BreedService>();
+            builder.Services.AddScoped<IBreedTypeService, BreedTypeService>();
+            builder.Services.AddScoped<IBreedService, BreedService>();
+            builder.Services.AddScoped<IBreedsRepository, BreedsRepository>();
             //   builder.Services.AddScoped
             //   builder.Services.AddTransient
+
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
+                ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+            builder.Services.AddDbContext<ApplicationContext>(options => 
+                options.UseSqlServer(connectionString));
 
             var app = builder.Build();
             if (!app.Environment.IsDevelopment())

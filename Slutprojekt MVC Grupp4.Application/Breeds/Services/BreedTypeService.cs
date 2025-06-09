@@ -1,8 +1,9 @@
-﻿using Slutprojekt.Domain.Entities;
+﻿using Slutprojekt.Application.Interfaces;
+using Slutprojekt.Domain.Entities;
 
 namespace Slutprojekt.Application.Breeds.Services;
 
-public class BreedTypeService
+public class BreedTypeService: IBreedTypeService
 {
     List<BreedType> breedtypes = [
     new BreedType() { Id=01 , BreedTypeName="Grupp 1 - Vall-, boskaps- och herdehundar" },

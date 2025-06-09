@@ -1,9 +1,10 @@
 ﻿
+using Slutprojekt.Application.Interfaces;
 using Slutprojekt.Domain.Entities;
 
 namespace Slutprojekt.Application.Breeds.Services;
 
-public class BreedService
+public class BreedService(): IBreedService
 {
     List<Breed> breeds = [
     new Breed() { Id=10 , BreedType=1, BreedName="Collie, långhårig", Description="Massa mjuk päls, elegant, lättlärd och gillar aktiviteter" },

@@ -3,7 +3,6 @@ using Slutprojekt.Domain.Entities;
 using Slutprojekt.Application.Breeds.Services;
 using Slutprojekt.Web.Views.Breeds;
 using Microsoft.AspNetCore.Mvc;
-using Slutprojekt.Application.Breeds.Services;
 
 namespace Slutprojekt.Web.Controllers;
 
