@@ -43,16 +43,25 @@ public class ServiceTests
     [Fact]
     public async Task AddBreedAsyncAdds()
     {
+        Breed nyBreed = new Breed { Id = 5, BreedType = 1, BreedName = "Labrador" };
+
+        
+        Mock<IBreedsRepository> breedsRepository = new Mock<IBreedsRepository>();
+        breedsRepository.Setup(u => u.AddBreedAsync(nyBreed)).Returns(Task.CompletedTask);
+
         Mock<IUnitOfWork> unitOfWork = GetUnitOfWork();
+        unitOfWork.Setup(u => u.BreedsRepository).Returns(breedsRepository.Object);
+
+        //Mock<IBreedTypeRepository> breedTypeRepository = new Mock<IBreedTypeRepository>();
 
         var breedService = new BreedService(unitOfWork.Object);
 
-        Breed nyBreed = new Breed { Id=5,BreedType=1,BreedName="Labrador"};
+        
         await breedService.AddBreedAsync(nyBreed);
 
         var result = await breedService.GetAllBreedsAsync();
-        Assert.Equal(3, result.Length);
-
+        
+        breedsRepository.Verify(u => u.AddBreedAsync(nyBreed), Times.Once);
     }
 
     private static Mock<IUnitOfWork> GetUnitOfWork()
