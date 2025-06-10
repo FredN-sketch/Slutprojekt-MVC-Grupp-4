@@ -20,7 +20,7 @@ public class InsertBreedVM
     [Display(Name = "Description", Prompt = "Enter a Description")]
     public required string? Description { get; set; }
 
-    public required TypesVM[] BreedTypes { get; set; }
+    public TypesVM?[] BreedTypes { get; set; }
     public class TypesVM
     {
         public int Id { get; set; }
