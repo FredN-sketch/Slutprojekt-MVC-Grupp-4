@@ -1,18 +1,28 @@
 ﻿@model IndexVM
 @{
-	ViewBag.Title = "Breeds";
+    ViewBag.Title = "Breeds";
 }
 
+<section>
+    <h2>Dog Breeds</h2>
+    <p>Explore the list of added breeds. Click a breed to view details.</p>
 
-	<h3 class="mb-1">Dogbreeds</h3>
-	<div>
-		<ul class="list-group mb-3" >
-			@foreach (var breed in Model.Raser)
-			{
-			<li class="list-group-item"> <div> <a asp-controller="Breeds" asp-action="DisplayBreed" asp-route-id="@breed.Id">  @breed.BreedName</a></div></li>
-			}
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+        @foreach (var breed in Model.Raser)
+        {
+            <article style="padding: 1rem; border: 1px solid #ddd; border-radius: 0.5rem;">
+                <header>
+                    <h3 style="margin-bottom: 0.5rem;">
+                        <a asp-controller="Breeds" asp-action="DisplayBreed" asp-route-id="@breed.Id">
+                            @breed.BreedName
+                        </a>
+                    </h3>
+                </header>
+            </article>
+        }
+    </div>
 
-		</ul>
-	</div>
-	<h3><a asp-action="InsertBreed">Add Breed</a></h3>
-
+    <p style="margin-top: 2rem;">
+        <a asp-action="InsertBreed" role="button">➕ Add New Breed</a>
+    </p>
+</section>
