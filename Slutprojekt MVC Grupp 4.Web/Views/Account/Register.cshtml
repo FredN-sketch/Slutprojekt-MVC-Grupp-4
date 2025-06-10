@@ -1,32 +1,38 @@
 ﻿
 @model RegisterVM
-<h3>Register</h3>
+
+
+<div class="col col-sm-10 col-md-6  mx-auto border p-3 bg-secondary">
+    <h3>Register</h3>
 <form asp-controller="Account" asp-action="Register">
-    <label asp-for="FirstName"></label>
-    <input asp-for="FirstName" />
+    @* <label asp-for="FirstName" class="form-label "></label> *@
+    <input asp-for="FirstName" class="form-control mb-2" placeholder="FirstName" />
     <span asp-validation-for="FirstName"></span>
 
-    <label asp-for="LastName"></label>
-    <input asp-for="LastName" />
+    @* <label asp-for="LastName"></label> *@
+    <input asp-for="LastName" class="form-control mb-2" placeholder="LastName" />
     <span asp-validation-for="LastName"></span>
 
-    <label asp-for="Email"></label>
-    <input asp-for="Email" />
+    @* <label asp-for="Email"></label> *@
+    <input asp-for="Email" class="form-control mb-2" placeholder="Email" />
     <span asp-validation-for="Email"></span>
 
-    <label asp-for="Admin"></label>
-    <input type="checkbox" asp-for="Admin" />
-    <span asp-validation-for="Admin"></span>
 
+    <div class="form-check">
+        <input type="checkbox" asp-for="Admin" class="form-check-input mb-2" placeholder="Admin" />
+        <label asp-for="Admin" class="form-check.label">Admin</label>
+        <span asp-validation-for="Admin"></span>
+    </div>
 
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
+    @* <label asp-for="Password"></label> *@
+    <input asp-for="Password" class="form-control mb-2" placeholder="Password" />
     <span asp-validation-for="Password"></span>
 
-    <label asp-for="PasswordRepeat"></label>
-    <input asp-for="PasswordRepeat" />
+    @* <label asp-for="PasswordRepeat"></label> *@
+    <input asp-for="PasswordRepeat" class="form-control mb-2" placeholder="PasswordRepeat" />
     <span asp-validation-for="PasswordRepeat"></span>
     <br />
-    <input type="submit" value="Register" />
+    <input type="submit" value="Register" class="form-control mb-2 bg-primary" />
     <div asp-validation-summary="All"></div>
 </form>
+</div>
