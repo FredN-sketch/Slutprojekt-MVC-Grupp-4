@@ -18,21 +18,24 @@
     <span asp-validation-for="Email"></span>
 
 
-    <div class="form-check">
-        <input type="checkbox" asp-for="Admin" class="form-check-input mb-2" placeholder="Admin" />
-        <label asp-for="Admin" class="form-check.label">Admin</label>
-        <span asp-validation-for="Admin"></span>
-    </div>
+   
 
     @* <label asp-for="Password"></label> *@
     <input asp-for="Password" class="form-control mb-2" placeholder="Password" />
     <span asp-validation-for="Password"></span>
 
     @* <label asp-for="PasswordRepeat"></label> *@
-    <input asp-for="PasswordRepeat" class="form-control mb-2" placeholder="PasswordRepeat" />
+    <input asp-for="PasswordRepeat" class="form-control mb-2" placeholder="Repeat Password" />
     <span asp-validation-for="PasswordRepeat"></span>
+        <div class="form-check">
+            <input type="checkbox" asp-for="Admin" class="form-check-input mb-2" placeholder="Admin" />
+            <label asp-for="Admin" class="form-check.label">Admin</label>
+            <span asp-validation-for="Admin"></span>
+        </div>
     <br />
     <input type="submit" value="Register" class="form-control mb-2 bg-primary" />
     <div asp-validation-summary="All"></div>
+
+       
 </form>
 </div>
