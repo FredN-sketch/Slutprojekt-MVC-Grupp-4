@@ -13,6 +13,11 @@ public class UserService(IIdentityUserService identityUserService) : IUserServic
     public async Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password) =>
         await identityUserService.CreateUserAsync(user, password);
 
+    public async Task<UserProfileDto[]> GetAllUsersAsync()
+    {
+        return await identityUserService.GetAllUsersAsync();
+    }
+
     public async Task<UserResultDto> SignInAsync(string email, string password) =>
         await identityUserService.SignInAsync(email, password);
     public async Task SignOutAsync() =>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Slutprojekt.Application.Dtos;
 using Slutprojekt.Application.Users;
 using Slutprojekt.Infrastructure.Persistance;
@@ -37,6 +38,13 @@ public class IdentityUserService(
 
 
         return new UserResultDto(result.Errors.FirstOrDefault()?.Description);
+    }
+
+    public async Task<UserProfileDto[]> GetAllUsersAsync()
+    {
+        return await userManager.Users
+            .Select(u => new UserProfileDto(u.Email, u.FirstName, u.LastName, u.Admin))
+            .ToArrayAsync();
     }
 
     public async Task<UserResultDto> SignInAsync(string email, string password)

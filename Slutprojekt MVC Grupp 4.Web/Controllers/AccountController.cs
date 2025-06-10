@@ -9,11 +9,20 @@ namespace Slutprojekt.Web.Controllers
 {
     public class AccountController(IUserService userService) : Controller
     {
-        [Authorize]
-        [HttpGet("members")]
-        public IActionResult Members()
+        [Authorize(Roles = "Administrator")]
+        [HttpGet("admin")]
+        public async Task<IActionResult> Admin()
         {
-            return View();
+            var viewModel = (await userService.GetAllUsersAsync())
+                .Select(u => new AdminVM
+                {
+                    Email = u.Email,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    IsAdmin = u.Admin
+                })
+                .ToArray();
+            return View(viewModel);
         }
 
 
@@ -38,7 +47,7 @@ namespace Slutprojekt.Web.Controllers
                 ModelState.AddModelError(string.Empty, result.ErrorMessage!);
                 return View();
             }
-
+            await userService.SignInAsync(viewModel.Email, viewModel.Password);
             // Redirect user
             return RedirectToAction(nameof(Login));
         }
@@ -66,6 +75,7 @@ namespace Slutprojekt.Web.Controllers
 
 
             // Redirect user
+            
             return RedirectToAction(nameof(Index), "Breeds");
         }
 

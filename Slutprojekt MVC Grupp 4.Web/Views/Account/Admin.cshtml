@@ -1,0 +1,13 @@
+﻿@model AdminVM[]
+
+<h1>Admin view</h1>
+
+<div>
+	<ul class="list-group mb-3">
+		@foreach (var member in Model)
+		{
+			<li class="list-group-item"> <div>@member.Email @member.FirstName @member.LastName @member.IsAdmin</div></li>
+		}
+
+	</ul>
+</div>
