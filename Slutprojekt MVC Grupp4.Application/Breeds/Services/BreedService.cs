@@ -6,7 +6,7 @@ namespace Slutprojekt.Application.Breeds.Services;
 
 public class BreedService(IUnitOfWork unitOfWork): IBreedService
 {
-    static int nextId = 71;
+    //static int nextId = 71;
 
     public async Task<Breed[]> GetAllBreedsAsync()
     {
