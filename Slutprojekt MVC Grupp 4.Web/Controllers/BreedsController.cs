@@ -91,7 +91,7 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
     {
         if (!ModelState.IsValid)
         {
-            return View();
+            return View(model);
         }
         Breed breed = new Breed
         {
