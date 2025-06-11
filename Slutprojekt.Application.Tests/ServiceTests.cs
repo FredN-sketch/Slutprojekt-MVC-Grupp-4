@@ -41,10 +41,10 @@ public class ServiceTests
     [Fact]
     public async Task AddBreedAsync_ExpectAddBreed()
     {
-        Breed nyBreed = new Breed { Id = 5, BreedType = 1, BreedName = "Labrador" };
+        Breed nyBreed = new() { Id = 5, BreedType = 1, BreedName = "Labrador" };
 
         
-        Mock<IBreedsRepository> breedsRepository = new Mock<IBreedsRepository>();
+        Mock<IBreedsRepository> breedsRepository = new();
         breedsRepository.Setup(u => u.AddBreedAsync(nyBreed)).Returns(Task.CompletedTask);
 
         Mock<IUnitOfWork> unitOfWork = GetUnitOfWork();

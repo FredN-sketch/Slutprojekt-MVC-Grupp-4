@@ -22,7 +22,7 @@ namespace Slutprojekt.Web.Tests
         public async Task InsertBreed_NoParams_ExpectCorrectViewModel()
         {
             //Arrange
-            var breedController = GetBreedsController().Item1;
+            var breedController = BreedsController.Item1;
 
             //Act
             var result = await breedController.InsertBreed();
@@ -44,7 +44,7 @@ namespace Slutprojekt.Web.Tests
             //Arrange
             var viewModel = new InsertBreedVM { Id = id, BreedType = breedType, BreedName = breedName, Description = description };
 
-            var o = GetBreedsController();
+            var o = BreedsController;
             var breedController = o.Item1;
             var breedServiceMock = o.Item2;
             var breedTypeServiceMock = o.Item3;
@@ -94,11 +94,11 @@ namespace Slutprojekt.Web.Tests
 
             var controller = new AccountController(mockUserService.Object);
 
-            var adminUser = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
-            {
+            var adminUser = new ClaimsPrincipal(new ClaimsIdentity(
+            [
         new Claim(ClaimTypes.Name, "admin@example.com"),
         new Claim(ClaimTypes.Role, "Administrator")
-            }, "mock"));
+            ], "mock"));
 
             controller.ControllerContext = new ControllerContext
             {
@@ -110,30 +110,33 @@ namespace Slutprojekt.Web.Tests
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var model = Assert.IsAssignableFrom<AdminVM[]>(viewResult.Model);
+            var model = Assert.IsType<AdminVM[]>(viewResult.Model, exactMatch: false);
 
             Assert.Equal(2, model.Length);
             Assert.Equal("admin@example.com", model[0].Email);
             Assert.True(model[0].IsAdmin);
         }
-        private (BreedsController, Mock<IBreedService>, Mock<IBreedTypeService>) GetBreedsController()
+        private (BreedsController, Mock<IBreedService>, Mock<IBreedTypeService>) BreedsController
         {
-            var breedService = new Mock<IBreedService>();
-            var breedTypeService = new Mock<IBreedTypeService>();
-            breedTypeService.Setup(service => service.GetAllBreedTypesAsync())
-                .Returns(Task.FromResult(new BreedType[]
-                {
+            get
+            {
+                var breedService = new Mock<IBreedService>();
+                var breedTypeService = new Mock<IBreedTypeService>();
+                breedTypeService.Setup(service => service.GetAllBreedTypesAsync())
+                    .Returns(Task.FromResult(new BreedType[]
+                    {
                 new() { Id = 1, BreedTypeName = "Grupp 1" },
                 new() { Id = 2, BreedTypeName = "Grupp 2" }
-                }));
-            breedService.Setup(service => service.GetAllBreedsAsync())
-               .Returns(Task.FromResult(new Breed[]
-               {
+                    }));
+                breedService.Setup(service => service.GetAllBreedsAsync())
+                   .Returns(Task.FromResult(new Breed[]
+                   {
                 new() { Id = 1, BreedType = 1, BreedName = "Schäfer", Description = "tysk hund" },
                 new() { Id = 2, BreedType = 2, BreedName = "Tax", Description = "betalar hundskatt" }
-               }));
-            return (new BreedsController(breedService.Object, breedTypeService.Object), breedService, breedTypeService);
+                   }));
+                return (new BreedsController(breedService.Object, breedTypeService.Object), breedService, breedTypeService);
 
+            }
         }
     }
 }

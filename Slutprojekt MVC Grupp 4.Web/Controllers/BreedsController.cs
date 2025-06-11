@@ -19,13 +19,12 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
         var model = await breedService.GetAllBreedsAsync();
         var view = new IndexVM()
         {
-            Raser = model
+            Raser = [.. model
             .Select(o => new IndexVM.HundrasVM
             {
                 Id = o.Id,
                 BreedName = o.BreedName,
-            })
-            .ToArray()
+            })]
         };
 
         return View(view);
@@ -37,7 +36,7 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
         var model = await breedService.GetBreedByIdAsync(id);
         var mode2 = await breedType.GetBreedTypeByIdAsync(model.BreedType);
 
-        DisplayBreedVM view = new DisplayBreedVM
+        DisplayBreedVM view = new()
         {
             BreedTypeInfo = mode2.BreedTypeName,
             BreedName = model.BreedName,
@@ -50,16 +49,16 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
     [HttpGet("Create")]
     public async Task<IActionResult> InsertBreed()
     {
-        InsertBreedVM view = new InsertBreedVM()
+        InsertBreedVM view = new()
         {
             Id = 0,
             BreedType = 0,
-            BreedTypes = (await breedType.GetAllBreedTypesAsync())
+            BreedTypes = [.. (await breedType.GetAllBreedTypesAsync())
             .Select(o => new InsertBreedVM.TypesVM()
             {
                 Id = o.Id,
                 BreedTypeName = o.BreedTypeName,
-            }).ToArray(),
+            })],
             BreedName = null!,
             Description=null,
         };
@@ -73,7 +72,7 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
         {
             return View(model);
         }
-        Breed breed = new Breed
+        Breed breed = new()
         {
             Id = model.Id,
             BreedType = model.BreedType,
