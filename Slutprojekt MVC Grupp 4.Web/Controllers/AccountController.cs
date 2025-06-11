@@ -35,6 +35,7 @@ namespace Slutprojekt.Web.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync(RegisterVM viewModel)
         {
+            
             if (!ModelState.IsValid)
                 return View();
 
