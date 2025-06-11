@@ -20,6 +20,18 @@ public class BreedService(IUnitOfWork unitOfWork): IBreedService
 
     public async Task AddBreedAsync(Breed breed)
     {
-        await unitOfWork.BreedsRepository.AddBreedAsync(breed);
+        unitOfWork.BreedsRepository.AddBreed(breed);
+        await unitOfWork.SaveChangesAsync();
+    }
+    public async Task DeleteBreedAsync(int id)
+    {
+        var breed = await unitOfWork.BreedsRepository.GetBreedByIdAsync(id);
+        unitOfWork.BreedsRepository.DeleteBreed(breed);
+        await unitOfWork.SaveChangesAsync();
+    }
+
+    public async Task UpdateBreedAsync(Breed breed)
+    {
+        await unitOfWork.UpdateBreedAsync(breed);
     }
 }

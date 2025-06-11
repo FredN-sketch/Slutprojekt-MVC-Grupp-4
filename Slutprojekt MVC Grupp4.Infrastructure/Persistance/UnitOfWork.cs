@@ -1,5 +1,7 @@
-﻿using Slutprojekt.Application;
+﻿using Microsoft.EntityFrameworkCore;
+using Slutprojekt.Application;
 using Slutprojekt.Application.Breeds.Interfaces;
+using Slutprojekt.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +17,13 @@ public class UnitOfWork(ApplicationContext context, IBreedsRepository breedsRepo
     public async Task SaveChangesAsync()
     {
         await context.SaveChangesAsync();
+    }
+    public async Task UpdateBreedAsync(Breed breed)
+    {
+        await context.Breeds
+            .Where(b => b.Id == breed.Id)
+            .ExecuteUpdateAsync(b => b.SetProperty(b => b.BreedName, breed.BreedName)
+                                        .SetProperty(b => b.Description, breed.Description)
+                                        .SetProperty(b => b.BreedType, breed.BreedType));
     }
 }

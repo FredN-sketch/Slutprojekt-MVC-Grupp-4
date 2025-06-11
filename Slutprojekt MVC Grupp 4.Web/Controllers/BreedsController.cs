@@ -41,6 +41,7 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
             BreedTypeInfo = mode2.BreedTypeName,
             BreedName = model.BreedName,
             Description = model.Description!,
+            Id = model.Id
         };
         return View(view);
     }
@@ -83,4 +84,49 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
         await breedService.AddBreedAsync(breed);
         return RedirectToAction("Index");
     }
+    [HttpGet("Update/{id}")]
+    public async Task<IActionResult> UpdateBreed(int id)
+    {
+        var model = await breedService.GetBreedByIdAsync(id);
+        var viewModel = new UpdateBreedVM()
+        {
+            Id = model.Id,
+            BreedType = model.BreedType,
+            BreedName = model.BreedName,
+            Description = model.Description!,
+            BreedTypes = [.. (await breedType.GetAllBreedTypesAsync())
+            .Select(o => new UpdateBreedVM.TypesVM()
+            {
+                Id = o.Id,
+                BreedTypeName = o.BreedTypeName,
+            })],
+        };
+        return View(viewModel);
+    }
+    [HttpPost("Update/{id}")]
+    public async Task<IActionResult> UpdateBreed(InsertBreedVM model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+        Breed breed = new()
+        {
+            Id = model.Id,
+            BreedType = model.BreedType,
+            BreedName = model.BreedName,
+            Description = model.Description,
+        };
+        await breedService.UpdateBreedAsync(breed);
+        return RedirectToAction("Index");
+    }
+
+
+    [HttpGet("Delete/{id}")]
+    public async Task<IActionResult> DeleteBreed(int id)
+    {
+        await breedService.DeleteBreedAsync(id);
+        return RedirectToAction("Index");
+    }
+
 }

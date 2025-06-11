@@ -6,7 +6,6 @@ public interface IBreedsRepository
 {
     public Task<Breed[]> GetAllBreedsAsync();
     public Task<Breed> GetBreedByIdAsync(int id);
-    public Task AddBreedAsync(Breed breed);
-    public Task RemoveBreedAsync(Breed breed);
-
+    public void AddBreed(Breed breed);
+    public void DeleteBreed(Breed breed);
 }

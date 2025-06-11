@@ -10,4 +10,10 @@
 <BR />
 <h3>@Model.Description</h3>
 <BR />
+<p style="margin-top: 2rem;">
+    <a asp-action="UpdateBreed" asp-route-id="@Model.Id" role="button" style="width: 300px; border-color: black">Edit this breed</a>
+</p>
+<p style="margin-top: 1rem;">
+    <a asp-action="DeleteBreed" asp-route-id="@Model.Id" role="button" style="background-color: red; width: 300px; border-color: black">➖ Delete this breed</a>
+</p>
 
