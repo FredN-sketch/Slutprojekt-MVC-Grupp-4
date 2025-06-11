@@ -29,12 +29,12 @@ namespace Slutprojekt.Web.Tests
 
         [Theory]
         //   [InlineData(new InsertBreedVM { Id = 1, BreedType = 1, BreedName = "Schäfer", Description = "tysk hund" }, true)]
-        [InlineData(3, 1, "Schäfer", "tysk hund", true)]
-        [InlineData(4, 99, "Tax", "", false)]
-        [InlineData(5, 2, null, "", false)]
-        [InlineData(6, null, "Sankt Bernard", "", false)]
+        [InlineData(3, 1, "Schäfer", "tysk hund","", true)]
+        [InlineData(4, 99, "Tax", "", "Breedtype 1-10", false)]
+        [InlineData(5, 2, null, "", "Breedname is required", false)]
+        [InlineData(6, null, "Sankt Bernard", "", "",false)]
 
-        public async Task InsertBreedWithParamsExpectCorrectViewModelAsync(int id, int breedType, string breedName, string description, bool expected)
+        public async Task InsertBreedWithParamsExpectCorrectViewModelAsync(int id, int breedType, string breedName, string description,string msg, bool expected)
         {
             //Arrange
             var viewModel = new InsertBreedVM { Id = id, BreedType = breedType, BreedName = breedName, Description = description };
@@ -53,26 +53,10 @@ namespace Slutprojekt.Web.Tests
             {
                 foreach (var item in results)
                 {
-                    switch (viewModel.Id) 
-                    {
-                        case 6:
-                    //        Assert.Equal("Breedtype is required", item.ErrorMessage);
-                    //        break;
-                        case 4: Assert.Equal("Breedtype 1-10", item.ErrorMessage);
-                            break;
-                        case 5: Assert.Equal("Breedname is required", item.ErrorMessage);
-                            break;
-                        default: break;
-                    }
+                    Assert.Equal(msg, item.ErrorMessage);
                     breedController.ModelState.AddModelError("TEST",item.ErrorMessage);
                 }
             }
-
-            // Act
-            //if (!expected)
-            //{
-            //    breedController.ModelState.AddModelError("BreedName", "BreedName är obligatoriskt");
-            //}
 
             var result = await breedController.InsertBreed(viewModel);
 
