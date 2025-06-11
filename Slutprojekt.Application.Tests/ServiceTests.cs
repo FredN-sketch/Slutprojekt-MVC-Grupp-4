@@ -10,7 +10,7 @@ namespace Slutprojekt.Application.Tests;
 public class ServiceTests
 {
     [Fact]
-    public async Task GetAllBreedsAsyncReturnsArrayOfBreed()
+    public async Task GetAllBreedsAsync_ReturnsArrayOfBreed()
     {
         Mock<IUnitOfWork> unitOfWork = GetUnitOfWork();
 
@@ -22,15 +22,13 @@ public class ServiceTests
         Assert.Equal(2, result.Length);
         Assert.Equal("Schäfer", result[0].BreedName);
         Assert.Equal("Tax", result[1].BreedName);
-
-
     }
 
     [Theory]
     [InlineData(1, "Schäfer")]
     [InlineData(2,"Tax")]
    
-    public async Task GetBreedByIdAsyncReturnsCorrectBreed(int id, string name)
+    public async Task GetBreedByIdAsync_WithProperId_ReturnsCorrectBreed(int id, string name)
     {
         Mock<IUnitOfWork> unitOfWork = GetUnitOfWorkID( id,  name);
         var breedService = new BreedService(unitOfWork.Object);
@@ -41,7 +39,7 @@ public class ServiceTests
         Assert.Equal(name, result.BreedName);
     }
     [Fact]
-    public async Task AddBreedAsyncAdds()
+    public async Task AddBreedAsync_ExpectAddBreed()
     {
         Breed nyBreed = new Breed { Id = 5, BreedType = 1, BreedName = "Labrador" };
 
@@ -67,7 +65,6 @@ public class ServiceTests
     private static Mock<IUnitOfWork> GetUnitOfWork()
     {
         var unitOfWork = new Mock<IUnitOfWork>();
-    //    unitOfWork.Setup(m => m.AddResponse(It.IsAny<GuestResponse>())).Returns(true);
         unitOfWork.Setup(u => u.BreedsRepository.GetAllBreedsAsync())
             .Returns(Task.FromResult(new Breed[]
             {
@@ -88,25 +85,5 @@ public class ServiceTests
             ));
         return unitOfWork;
     }
-
-    //public (BreedsController, Mock<IBreedService>, Mock<IBreedTypeService>) GetBreedsController()
-    //{
-    //    var breedService = new Mock<IBreedService>();
-    //    var breedTypeService = new Mock<IBreedTypeService>();
-    //    breedTypeService.Setup(service => service.GetAllBreedTypesAsync())
-    //        .Returns(Task.FromResult(new BreedType[]
-    //        {
-    //            new() { Id = 1, BreedTypeName = "Grupp 1" },
-    //            new() { Id = 2, BreedTypeName = "Grupp 2" }
-    //        }));
-    //    breedService.Setup(service => service.GetAllBreedsAsync())
-    //       .Returns(Task.FromResult(new Breed[]
-    //       {
-    //            new() { Id = 1, BreedType = 1, BreedName = "Schäfer", Description = "tysk hund" },
-    //            new() { Id = 2, BreedType = 2, BreedName = "Tax", Description = "betalar hundskatt" }
-    //       }));
-    //    return (new BreedsController(breedService.Object, breedTypeService.Object), breedService, breedTypeService);
-
-    //}
 
 }

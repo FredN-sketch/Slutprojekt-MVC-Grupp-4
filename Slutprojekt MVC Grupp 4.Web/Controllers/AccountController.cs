@@ -49,7 +49,7 @@ namespace Slutprojekt.Web.Controllers
             }
             await userService.SignInAsync(viewModel.Email, viewModel.Password);
             // Redirect user
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction(nameof(Index), "Breeds");
         }
 
         [HttpGet("login")]

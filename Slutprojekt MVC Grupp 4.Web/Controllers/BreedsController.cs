@@ -12,28 +12,9 @@ namespace Slutprojekt.Web.Controllers;
 [Authorize]
 public class BreedsController(IBreedService breedService, IBreedTypeService breedType) : Controller
 {
-    //public static BreedService breedService = new BreedService();
     [Route("members")]
     [Route("/")]
     public async Task<IActionResult> Index()
-    {
-        var model = await breedService.GetAllBreedsAsync();
-        var view = new IndexVM()
-        {
-            Raser = model
-            .Select(o => new IndexVM.HundrasVM
-            {
-                Id = o.Id,
-                BreedName = o.BreedName,
-            })
-            .ToArray()
-        };
-
-        return View(view);
-    }
-   // [Authorize(Role = "admin")]
-    [Route("admin")]
-    public async Task<IActionResult> Admin()
     {
         var model = await breedService.GetAllBreedsAsync();
         var view = new IndexVM()
@@ -60,7 +41,7 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
         {
             BreedTypeInfo = mode2.BreedTypeName,
             BreedName = model.BreedName,
-            Description = model.Description,
+            Description = model.Description!,
         };
         return View(view);
     }
@@ -79,8 +60,7 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
                 Id = o.Id,
                 BreedTypeName = o.BreedTypeName,
             }).ToArray(),
-            //BreedTypes = breedType.GetAllBreedTypes().ToArray(),
-            BreedName = null,
+            BreedName = null!,
             Description=null,
         };
 

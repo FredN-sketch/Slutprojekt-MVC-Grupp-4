@@ -21,15 +21,25 @@
 	<header>
 		<nav>
 			<ul>
-				@if (User.Identity?.IsAuthenticated ?? false)
-				{
-					<li><a asp-controller="Breeds" asp-action="Index">Dog Breeds</a></li>
-					<li><a asp-controller="Account" asp-action="LogOut">Logout</a></li>
-
-					@if (User.IsInRole("Administrator"))
+				<li><a asp-controller="Breeds" asp-action="Index">Dog Breeds</a></li>
+				@if (User.IsInRole("Administrator"))
 					{
 						<li><a asp-controller="Account" asp-action="Admin">Admin View</a></li>
 					}
+					</ul>
+					<ul style="align-self: flex-end">
+				@if (User.Identity?.IsAuthenticated ?? false)
+				{
+
+					@if ((User.Identity?.IsAuthenticated ?? false) && User.FindFirst("FirstName") != null)
+					{
+						<li>User: @User.FindFirst("FirstName")!.Value</li>
+					}
+
+					
+					<li><a asp-controller="Account" asp-action="LogOut">Logout</a></li>
+
+					
 				}
 				else
 				{
@@ -41,10 +51,6 @@
 
 		<h1>@ViewBag.Title</h1>
 
-		@if (User.Identity?.IsAuthenticated ?? false)
-		{
-			<p>Welcome, @User.Identity.Name!</p>
-		}
 	</header>
 
 	<main>

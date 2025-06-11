@@ -6,6 +6,7 @@ using Slutprojekt.Infrastructure.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,7 @@ public class IdentityUserService(
         if (user.Admin)
             await userManager.AddToRoleAsync(appuser, RoleName);
 
+        if (result.Succeeded) await userManager.AddClaimAsync(appuser, new Claim("FirstName", user.FirstName));
 
         return new UserResultDto(result.Errors.FirstOrDefault()?.Description);
     }
@@ -43,7 +45,7 @@ public class IdentityUserService(
     public async Task<UserProfileDto[]> GetAllUsersAsync()
     {
         return await userManager.Users
-            .Select(u => new UserProfileDto(u.Email, u.FirstName, u.LastName, u.Admin))
+            .Select(u => new UserProfileDto(u.Email!, u.FirstName, u.LastName, u.Admin))
             .ToArrayAsync();
     }
 
