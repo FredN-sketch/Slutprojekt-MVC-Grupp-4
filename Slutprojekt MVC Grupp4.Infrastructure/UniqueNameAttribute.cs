@@ -10,10 +10,13 @@ namespace Slutprojekt.Application.Breeds
 {
     public class UniqueNameAttribute: ValidationAttribute
     {
-        protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
+            bool exists = false;
+
             var context = validationContext.GetService(typeof(ApplicationContext)) as ApplicationContext;
-            var exists = context.Breeds.Any(b => b.BreedName.Equals(value.ToString()));
+            if(context != null)
+                 exists = context!.Breeds.Any(b => b.BreedName.Equals(value!.ToString()));
             
                 return exists ? new ValidationResult("That breed has already been added") : ValidationResult.Success;
         }
