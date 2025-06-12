@@ -9,7 +9,7 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
         @foreach (var breed in Model.Raser)
         {
-            <article style="padding: 1rem; border: 1px solid #ddd; border-radius: 0.5rem;">
+            <article style="padding: 1rem; border: 2px solid #FFD700; border-radius: 0.5rem;">
                 <header>
                     <h3 style="margin-bottom: 0.5rem;">
                         <a asp-controller="Breeds" asp-action="DisplayBreed" asp-route-id="@breed.Id">
