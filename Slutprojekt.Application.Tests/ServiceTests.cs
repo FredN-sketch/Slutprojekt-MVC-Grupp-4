@@ -45,7 +45,7 @@ public class ServiceTests
 
         
         Mock<IBreedsRepository> breedsRepository = new();
-        breedsRepository.Setup(u => u.AddBreedAsync(nyBreed)).Returns(Task.CompletedTask);
+        breedsRepository.Setup(u => u.AddBreed(nyBreed));
 
         Mock<IUnitOfWork> unitOfWork = GetUnitOfWork();
         unitOfWork.Setup(u => u.BreedsRepository).Returns(breedsRepository.Object);
@@ -59,7 +59,7 @@ public class ServiceTests
 
         var result = await breedService.GetAllBreedsAsync();
         
-        breedsRepository.Verify(u => u.AddBreedAsync(nyBreed), Times.Once);
+        breedsRepository.Verify(u => u.AddBreed(nyBreed), Times.Once);
     }
 
     private static Mock<IUnitOfWork> GetUnitOfWork()

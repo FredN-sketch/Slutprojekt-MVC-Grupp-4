@@ -1,7 +1,6 @@
-﻿
-namespace Slutprojekt.Web.Views.Account
+﻿namespace Slutprojekt.Web.Views.Account
 {
-    public class AdminVM
+    public class MembersVM
     {
         public string Email { get; set; }
         public string FirstName { get; set; }

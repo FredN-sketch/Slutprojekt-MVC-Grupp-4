@@ -21,7 +21,10 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a asp-controller="Breeds" asp-action="Index">Dog Breeds</a></li>
+				@if (User.Identity?.IsAuthenticated ?? false)
+				{
+					<li><a asp-controller="Breeds" asp-action="Index">Dog Breeds</a></li>
+				}
 				@if (User.IsInRole("Administrator"))
 					{
 						<li><a asp-controller="Account" asp-action="Admin">Admin View</a></li>
@@ -33,12 +36,11 @@
 
 					@if ((User.Identity?.IsAuthenticated ?? false) && User.FindFirst("FirstName") != null)
 					{
-						<li>User: @User.FindFirst("FirstName")!.Value</li>
+						<li>User: <a asp-controller="Account" asp-action="Members">@User.FindFirst("FirstName")!.Value</a></li>
 					}
 
 					
 					<li><a asp-controller="Account" asp-action="LogOut">Logout</a></li>
-
 					
 				}
 				else

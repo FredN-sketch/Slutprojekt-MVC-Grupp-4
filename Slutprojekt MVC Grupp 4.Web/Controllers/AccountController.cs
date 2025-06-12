@@ -35,7 +35,7 @@ namespace Slutprojekt.Web.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync(RegisterVM viewModel)
         {
-            
+
             if (!ModelState.IsValid)
                 return View();
 
@@ -76,7 +76,7 @@ namespace Slutprojekt.Web.Controllers
 
 
             // Redirect user
-            
+
             return RedirectToAction(nameof(Index), "Breeds");
         }
 
@@ -85,6 +85,19 @@ namespace Slutprojekt.Web.Controllers
         {
             await userService.SignOutAsync();
             return RedirectToAction(nameof(Login));
+        }
+        [Authorize]
+        [HttpGet("members")]
+        public async Task<IActionResult> Members()
+        {
+            var user = await userService.GetAllUsersAsync();
+            var currentUser = user.FirstOrDefault(u => u.Email == User.Identity?.Name);
+            if (currentUser == null)
+            {
+                return NotFound("User not found");
+            }
+            var viewModel = new MembersVM { Email = currentUser.Email, FirstName= currentUser.FirstName, LastName =currentUser.LastName, IsAdmin = currentUser.Admin };
+            return View(viewModel);
         }
 
     }

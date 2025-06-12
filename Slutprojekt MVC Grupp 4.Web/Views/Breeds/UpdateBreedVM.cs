@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Slutprojekt.Application.Breeds;
+using System.ComponentModel.DataAnnotations;
 
 namespace Slutprojekt.Web.Views.Breeds
 {
@@ -13,6 +14,7 @@ namespace Slutprojekt.Web.Views.Breeds
 
 
         [Display(Name = "Breedname", Prompt = "Enter breedname")]
+        [UniqueName]
         [Required(ErrorMessage = ("Breedname is required"))]
         public required string BreedName { get; set; }
 

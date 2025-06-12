@@ -6,13 +6,13 @@ using Slutprojekt.Domain.Entities;
 using Slutprojekt.Web.Views.Breeds;
 using System.Data;
 using System.Reflection;
+using static Slutprojekt.Web.Views.Breeds.InsertBreedVM;
 
 namespace Slutprojekt.Web.Controllers;
 
 [Authorize]
 public class BreedsController(IBreedService breedService, IBreedTypeService breedType) : Controller
 {
-    [Route("members")]
     [Route("/")]
     public async Task<IActionResult> Index()
     {
@@ -71,6 +71,12 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
     {
         if (!ModelState.IsValid)
         {
+            model.BreedTypes = (await breedType.GetAllBreedTypesAsync())
+            .Select(o => new InsertBreedVM.TypesVM
+            {
+                Id = o.Id,
+                BreedTypeName = o.BreedTypeName
+            }).ToArray();
             return View(model);
         }
         Breed breed = new()

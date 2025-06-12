@@ -1,0 +1,7 @@
+﻿@model MembersVM
+@{
+	ViewBag.Title = "Member page";
+}
+<p>Welcome, @Model.FirstName @Model.LastName</p>
+<p>Your email is: @Model.Email</p>
+<p>You are @(Model.IsAdmin ? "" : "not") an administrator</p>

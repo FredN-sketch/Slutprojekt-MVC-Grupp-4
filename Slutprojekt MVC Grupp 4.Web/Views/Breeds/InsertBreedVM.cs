@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Slutprojekt.Application.Breeds;
+using Slutprojekt.Application.Breeds.Services;
+using Slutprojekt.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Slutprojekt.Web.Views.Breeds;
 
@@ -13,6 +16,7 @@ public class InsertBreedVM
  
 
     [Display(Name = "Breedname", Prompt = "Enter breedname")]
+    [UniqueName]
     [Required(ErrorMessage = ("Breedname is required"))]
     public required string BreedName { get; set; }
 

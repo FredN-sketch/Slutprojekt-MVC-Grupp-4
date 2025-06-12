@@ -51,7 +51,6 @@ namespace Slutprojekt_MVC_Grupp_4.Web
             }
 
             app.MapControllers();
-            app.UseStaticFiles();
             app.Run();
         }
     }
