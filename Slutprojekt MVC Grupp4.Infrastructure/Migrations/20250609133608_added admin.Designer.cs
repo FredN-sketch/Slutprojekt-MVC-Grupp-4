@@ -13,7 +13,7 @@ namespace Slutprojekt.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
     [Migration("20250609133608_added admin")]
-    partial class addedadmin
+    partial class Addedadmin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

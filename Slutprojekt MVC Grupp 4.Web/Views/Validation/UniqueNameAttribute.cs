@@ -22,7 +22,7 @@ public class UniqueNameAttribute: ValidationAttribute
             if (validationContext.ObjectInstance is InsertBreedVM insertBreed)
             {
                 var exists = context!.Breeds.Any(b => b.BreedName.Equals(value!.ToString()));
-                return exists ? new ValidationResult("That breed has already been added") : ValidationResult.Success;
+                return exists ? new ValidationResult("A breed with that name already exists") : ValidationResult.Success;
             }
 
             if (validationContext.ObjectInstance is UpdateBreedVM updateBreed)
@@ -31,7 +31,7 @@ public class UniqueNameAttribute: ValidationAttribute
                 if (saved != null && !value.Equals(saved.BreedName)) //changed
                 {
                     var exists = context!.Breeds.Any(b => b.BreedName.Equals(value!.ToString()));
-                    return exists ? new ValidationResult("That breed has already been added") : ValidationResult.Success;
+                    return exists ? new ValidationResult("A breed with that name already exists") : ValidationResult.Success;
                 }
             }
         }

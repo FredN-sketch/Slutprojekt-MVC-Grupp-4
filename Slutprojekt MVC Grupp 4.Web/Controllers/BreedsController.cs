@@ -34,11 +34,11 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
     public async Task<IActionResult> DisplayBreed(int id)
     {
         var model = await breedService.GetBreedByIdAsync(id);
-        var mode2 = await breedType.GetBreedTypeByIdAsync(model.BreedType);
+        var mode2 = await breedType.GetBreedTypeByIdAsync(model!.BreedType);
 
         DisplayBreedVM view = new()
         {
-            BreedTypeInfo = mode2.BreedTypeName,
+            BreedTypeInfo = mode2!.BreedTypeName,
             BreedName = model.BreedName,
             Description = model.Description!,
             Id = model.Id
@@ -71,12 +71,12 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
     {
         if (!ModelState.IsValid)
         {
-            model.BreedTypes = (await breedType.GetAllBreedTypesAsync())
+            model.BreedTypes = [.. (await breedType.GetAllBreedTypesAsync())
             .Select(o => new InsertBreedVM.TypesVM
             {
                 Id = o.Id,
                 BreedTypeName = o.BreedTypeName
-            }).ToArray();
+            })];
             return View(model);
         }
         Breed breed = new()
@@ -96,7 +96,7 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
         var model = await breedService.GetBreedByIdAsync(id);
         var viewModel = new UpdateBreedVM()
         {
-            Id = model.Id,
+            Id = model!.Id,
             BreedType = model.BreedType,
             BreedName = model.BreedName,
             Description = model.Description!,
@@ -114,12 +114,12 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
     {
         if (!ModelState.IsValid)
         {
-            model.BreedTypes = (await breedType.GetAllBreedTypesAsync())
+            model.BreedTypes = [.. (await breedType.GetAllBreedTypesAsync())
             .Select(o => new UpdateBreedVM.TypesVM
             {
                 Id = o.Id,
                 BreedTypeName = o.BreedTypeName
-            }).ToArray();
+            })];
 
             return View(model);
         }

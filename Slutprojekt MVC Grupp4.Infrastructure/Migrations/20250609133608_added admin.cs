@@ -5,7 +5,7 @@
 namespace Slutprojekt.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class addedadmin : Migration
+    public partial class Addedadmin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
