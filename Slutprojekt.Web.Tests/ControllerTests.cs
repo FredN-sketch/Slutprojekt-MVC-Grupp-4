@@ -36,8 +36,8 @@ namespace Slutprojekt.Web.Tests
         //   [InlineData(new InsertBreedVM { Id = 1, BreedType = 1, BreedName = "Schäfer", Description = "tysk hund" }, true)]
         [InlineData(3, 1, "Schäfer", "tysk hund", "", true)]
         [InlineData(4, 99, "Tax", "", "Breedtype 1-10", false)]
-        [InlineData(5, 2, null, "", "Breedname is required", false)]
-        [InlineData(6, null, "Sankt Bernard", "", "Breedtype 1-10", false)]
+        [InlineData(5, 2, "", "", "Breedname is required", false)]
+        [InlineData(6, -1, "Sankt Bernard", "", "Breedtype 1-10", false)]
 
         public async Task InsertBreed_WithParams_ExpectCorrectViewModel(int id, int breedType, string breedName, string description, string msg, bool expected)
         {
@@ -116,7 +116,7 @@ namespace Slutprojekt.Web.Tests
             Assert.Equal("admin@example.com", model[0].Email);
             Assert.True(model[0].IsAdmin);
         }
-        private (BreedsController, Mock<IBreedService>, Mock<IBreedTypeService>) BreedsController
+        static private (BreedsController, Mock<IBreedService>, Mock<IBreedTypeService>) BreedsController
         {
             get
             {

@@ -61,7 +61,7 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
                 BreedTypeName = o.BreedTypeName,
             })],
             BreedName = null!,
-            Description=null,
+            Description = null,
         };
 
         return View(view);
@@ -110,10 +110,17 @@ public class BreedsController(IBreedService breedService, IBreedTypeService bree
         return View(viewModel);
     }
     [HttpPost("Update/{id}")]
-    public async Task<IActionResult> UpdateBreed(InsertBreedVM model)
+    public async Task<IActionResult> UpdateBreed(UpdateBreedVM model)
     {
         if (!ModelState.IsValid)
         {
+            model.BreedTypes = (await breedType.GetAllBreedTypesAsync())
+            .Select(o => new UpdateBreedVM.TypesVM
+            {
+                Id = o.Id,
+                BreedTypeName = o.BreedTypeName
+            }).ToArray();
+
             return View(model);
         }
         Breed breed = new()

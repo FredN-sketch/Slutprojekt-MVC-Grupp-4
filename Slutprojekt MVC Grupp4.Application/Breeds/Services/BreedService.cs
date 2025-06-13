@@ -13,7 +13,7 @@ public class BreedService(IUnitOfWork unitOfWork): IBreedService
         return [.. (await unitOfWork.BreedsRepository.GetAllBreedsAsync()).OrderBy(o => o.BreedName)];
     }
 
-    public async Task<Breed> GetBreedByIdAsync(int id)
+    public async Task<Breed?> GetBreedByIdAsync(int id)
     {
         return await unitOfWork.BreedsRepository.GetBreedByIdAsync(id);
     }
@@ -26,8 +26,11 @@ public class BreedService(IUnitOfWork unitOfWork): IBreedService
     public async Task DeleteBreedAsync(int id)
     {
         var breed = await unitOfWork.BreedsRepository.GetBreedByIdAsync(id);
-        unitOfWork.BreedsRepository.DeleteBreed(breed);
-        await unitOfWork.SaveChangesAsync();
+        if (breed != null)
+        {
+            unitOfWork.BreedsRepository.DeleteBreed(breed);
+            await unitOfWork.SaveChangesAsync();
+        }
     }
 
     public async Task UpdateBreedAsync(Breed breed)

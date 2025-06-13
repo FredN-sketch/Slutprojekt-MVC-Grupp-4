@@ -16,7 +16,7 @@ namespace Slutprojekt.Infrastructure.Persistance.Repositories
             return await context.BreedTypes.ToArrayAsync();
         }
 
-        public async Task<BreedType> GetBreedTypeByIdAsync(int id)
+        public async Task<BreedType?> GetBreedTypeByIdAsync(int id)
         {
             return await context.BreedTypes
                 .SingleOrDefaultAsync(b => b.Id == id);

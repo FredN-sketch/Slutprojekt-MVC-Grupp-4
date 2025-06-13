@@ -1,6 +1,8 @@
 ﻿using Slutprojekt.Application.Breeds;
 using Slutprojekt.Application.Breeds.Services;
 using Slutprojekt.Domain.Entities;
+using Slutprojekt.Infrastructure;
+using Slutprojekt.Web.Views.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace Slutprojekt.Web.Views.Breeds;
@@ -24,7 +26,7 @@ public class InsertBreedVM
     [Display(Name = "Description", Prompt = "Enter a Description")]
     public required string? Description { get; set; }
 
-    public TypesVM?[] BreedTypes { get; set; }
+    public TypesVM[]? BreedTypes { get; set; }
     public class TypesVM
     {
         public int Id { get; set; }
